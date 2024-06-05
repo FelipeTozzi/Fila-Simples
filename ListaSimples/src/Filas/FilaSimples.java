@@ -1,7 +1,5 @@
 package Filas;
 public class FilaSimples {
-
-    // t = elem              node = No
     private No com;
     private No fim;
     private int tamanhoatual;
@@ -21,13 +19,14 @@ public class FilaSimples {
             System.out.println("Valor inválido");
         } else {
             this.tamanhomax = elemento;
+            System.out.println("Tamanho máximo alterado");
         }
     }
 
     //coloca elementos no fim
     public void FinalFila(int elemento) {
 
-        if (tamanhoatual >= tamanhomax) {
+        if (tamanhoatual > tamanhomax) {
             System.out.println("Criação ultrapassa limite");
         } else {
             No CriaNo = new No(elemento);
@@ -49,7 +48,6 @@ public class FilaSimples {
         if (tamanhoatual == 0) {
             System.out.print("Adicione elementos primeiro");
         } else {
-            int elementos = com.elementos;
             com = com.prox;
             if (com == null) {
                 fim = null;
@@ -58,14 +56,6 @@ public class FilaSimples {
             System.out.println("número removido");
         }
     }
-    public int VisuCom() {
-            if (tamanhoatual == 0) {
-                System.out.println("Adicione elementos primeiro");
-                return 404;
-            } else {
-                return com.elementos;
-            }
-        }
 
     public boolean Buscar(int elemento) {
         No buscar = com;
@@ -77,7 +67,6 @@ public class FilaSimples {
         }
         return false;
     }
-
 
     public void MassDelete(){
         No buscar = com;
@@ -113,9 +102,39 @@ public class FilaSimples {
             while (buscar != null) {
                 if (buscar.elementos > Maior)
                     Maior = buscar.elementos;
-                    buscar = buscar.prox;
+                buscar = buscar.prox;
             }
             System.out.println(STR."O maior elemento é \{Maior}");
+        }
+    }
+
+    public void DeletarTodosOsElementosSoQueNaoJaQueNaVerdadeSaoTodasAsInstanciasDeUmElementoNaFila(int elemento){
+        if (tamanhoatual == 0) {
+            System.out.println("Adicione elementos primeiro");
+
+        } else {
+            No buscar = com;
+            No ante = null;
+
+            while (com != null && com.elementos == elemento){
+                com = com.prox;
+                tamanhoatual--;
+            }
+
+            while (buscar != null) {
+                if (buscar.elementos == elemento) {
+                    if (ante != null) {
+                        ante.prox = buscar.prox;
+                    }
+                    if (buscar == fim) {
+                        fim = ante;
+                    }
+                    tamanhoatual--;
+                } else {
+                    ante = buscar;
+                }
+                    buscar = buscar.prox;
+            }
         }
     }
 
@@ -152,7 +171,7 @@ public class FilaSimples {
                 quantidate++;
                 buscar = buscar.prox;
             }
-            float media = soma/quantidate;
+            float media = (float) soma /quantidate;
             System.out.println(STR."A média dos elemento é \{media}");
         }
     }
