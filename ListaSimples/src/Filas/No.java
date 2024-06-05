@@ -1,6 +1,6 @@
 package Filas;
 
-public class No<elem> {
+public class No {
 
     int elementos;
     No prox;
